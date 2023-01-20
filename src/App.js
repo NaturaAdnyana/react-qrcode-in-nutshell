@@ -90,6 +90,7 @@ function App() {
         </button>
         {!result && (
           <QrReader
+            ref={scannerRef}
             delay={delay}
             style={previewStyle}
             onError={handleError}
