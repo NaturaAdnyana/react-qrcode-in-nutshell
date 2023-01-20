@@ -1,6 +1,7 @@
 import "./App.css";
 import QrCode from "qrcode.react";
-import QrReader from "react-qr-scanner";
+// import QrReader from "react-qr-scanner";
+import QrReader from "modern-react-qr-reader";
 import { useRef, useState } from "react";
 
 function App() {
@@ -41,10 +42,8 @@ function App() {
   };
 
   const [isFront, setIsFront] = useState(false);
-  const scannerRef = useRef(null);
   const handleCamera = () => {
     setIsFront(!isFront);
-    scannerRef.current.changeCamera();
   };
 
   return (
@@ -90,12 +89,16 @@ function App() {
         </button>
         {!result && (
           <QrReader
-            ref={scannerRef}
             delay={delay}
             style={previewStyle}
             onError={handleError}
             onScan={handleScan}
-            facingMode={isFront ? "front" : "rear"}
+            // constraints={{
+            //   facingMode: { exact: isFront ? "user" : "environment" },
+            // }}
+            // constraints={{ facingMode: isFront ? "front" : "rear" }}
+            // facingMode={isFront ? "front" : "rear"}
+            facingMode={isFront ? "user" : "environment"}
           />
         )}
         <p>Hasil Scan : {result}</p>
