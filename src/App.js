@@ -92,7 +92,7 @@ function App() {
             style={previewStyle}
             onError={handleError}
             onScan={handleScan}
-            facingMode={isFront ? "front" : "rear"}
+            facingMode={isFront ? "user" : "environment"}
           />
         )}
         <p>Hasil Scan : {result}</p>
