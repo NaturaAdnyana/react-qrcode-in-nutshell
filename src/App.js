@@ -28,23 +28,14 @@ function App() {
 
   const handleScan = (data) => {
     if (data) {
-      setResult(data.text);
+      setResult(data);
+      console.log(data);
     }
   };
 
   const handleError = (err) => {
     console.error(err);
   };
-
-  // const previewStyle = {
-  //   height: 240,
-  //   width: 320,
-  // };
-
-  // const [isFront, setIsFront] = useState(false);
-  // const handleCamera = () => {
-  //   setIsFront(!isFront);
-  // };
 
   return (
     <div className="App">
@@ -84,24 +75,19 @@ function App() {
         </button>
       </form>
       <div className="scanner">
-        {/* <button onClick={handleCamera}>
-          {isFront ? "Front" : "Back"} Camera
-        </button> */}
-        {!result && (
+        {!result ? (
           <QrReader
             delay={delay}
             style={{ width: "100%" }}
             onError={handleError}
             onScan={handleScan}
-            // constraints={{
-            //   facingMode: { exact: isFront ? "user" : "environment" },
-            // }}
-            // constraints={{ facingMode: isFront ? "front" : "rear" }}
-            // facingMode={isFront ? "front" : "rear"}
-            // facingMode={isFront ? "user" : "environment"}
           />
+        ) : (
+          <>
+            <p>Hasil Scan : {result}</p>
+            <button onClick={() => setResult(null)}>Scan Lagi</button>
+          </>
         )}
-        <p>Hasil Scan : {result}</p>
       </div>
     </div>
   );
