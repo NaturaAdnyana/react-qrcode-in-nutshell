@@ -40,6 +40,11 @@ function App() {
     width: 320,
   };
 
+  const [isFront, setIsFront] = useState(false);
+  const handleCamera = () => {
+    setIsFront(!isFront);
+  };
+
   return (
     <div className="App">
       <h1>
@@ -73,15 +78,21 @@ function App() {
       </div>
 
       <form onSubmit={downloadQR}>
-        <button type="submit">Download</button>
+        <button type="submit" className="download">
+          Download
+        </button>
       </form>
-      <div>
+      <div className="scanner">
+        <button onClick={handleCamera}>
+          {isFront ? "Front" : "Back"} Camera
+        </button>
         {!result && (
           <QrReader
             delay={delay}
             style={previewStyle}
             onError={handleError}
             onScan={handleScan}
+            facingMode={isFront ? "front" : "rear"}
           />
         )}
         <p>Hasil Scan : {result}</p>
