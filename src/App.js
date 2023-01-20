@@ -41,8 +41,10 @@ function App() {
   };
 
   const [isFront, setIsFront] = useState(false);
+  const scannerRef = useRef(null);
   const handleCamera = () => {
     setIsFront(!isFront);
+    scannerRef.current.changeCamera();
   };
 
   return (
@@ -92,7 +94,7 @@ function App() {
             style={previewStyle}
             onError={handleError}
             onScan={handleScan}
-            facingMode={isFront ? "user" : "environment"}
+            facingMode={isFront ? "front" : "rear"}
           />
         )}
         <p>Hasil Scan : {result}</p>
